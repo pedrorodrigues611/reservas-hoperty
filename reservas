@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Propriedades</title>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const properties = [
+      { name: "Bem Me Quer", description: "Alojamento confortável e moderno.", price: 90 },
+      { name: "Blue Paradise Apartment", description: "Apartamento moderno com vista parcial do mar.", price: 140 }
+    ];
+
+    const PropertyCard = ({ property }) => (
+      <div style={{ backgroundColor: '#fff', borderRadius: '16px', padding: '16px', margin: '10px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
+        <h2>{property.name}</h2>
+        <p>{property.description}</p>
+        <p><strong>{property.price}€ / noite</strong></p>
+        <button style={{ backgroundColor: '#3b82f6', color: '#fff', padding: '10px', border: 'none', cursor: 'pointer' }}>
+          Reservar Agora
+        </button>
+      </div>
+    );
+
+    const App = () => (
+      <div>
+        <h1 style={{ textAlign: 'center' }}>As Nossas Propriedades</h1>
+        <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
+          {properties.map((property, index) => <PropertyCard key={index} property={property} />)}
+        </div>
+      </div>
+    );
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>
