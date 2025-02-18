@@ -1,42 +1,156 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Propriedades</title>
-  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propriedades Hoperty</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+        .property-card {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background: white;
+        }
+        .property-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .property-details {
+            padding: 15px;
+        }
+        .property-details h3 {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+        .property-details p {
+            font-size: 14px;
+            color: #666;
+        }
+        .property-details .price {
+            font-weight: bold;
+            color: #007BFF;
+        }
+        .property-details .reserve-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 12px;
+            background: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
-  <div id="root"></div>
-  <script type="text/babel">
-    const properties = [
-      { name: "Bem Me Quer", description: "Alojamento confortável e moderno.", price: 90 },
-      { name: "Blue Paradise Apartment", description: "Apartamento moderno com vista parcial do mar.", price: 140 }
-    ];
-
-    const PropertyCard = ({ property }) => (
-      <div style={{ backgroundColor: '#fff', borderRadius: '16px', padding: '16px', margin: '10px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
-        <h2>{property.name}</h2>
-        <p>{property.description}</p>
-        <p><strong>{property.price}€ / noite</strong></p>
-        <button style={{ backgroundColor: '#3b82f6', color: '#fff', padding: '10px', border: 'none', cursor: 'pointer' }}>
-          Reservar Agora
-        </button>
-      </div>
-    );
-
-    const App = () => (
-      <div>
-        <h1 style={{ textAlign: 'center' }}>As Nossas Propriedades</h1>
-        <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
-          {properties.map((property, index) => <PropertyCard key={index} property={property} />)}
+    <h1>Nossas Principais Propriedades</h1>
+    <div class="grid-container">
+        <div class="property-card">
+            <img src="https://via.placeholder.com/300" alt="Blue Paradise Apartment">
+            <div class="property-details">
+                <h3>Blue Paradise Apartment by Hoperty</h3>
+                <p>Apartamento moderno com vista para o mar.</p>
+                <p class="price">140€ / noite</p>
+                <a href="#" class="reserve-btn">Reservar Agora</a>
+            </div>
         </div>
-      </div>
-    );
 
-    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
-  </script>
+        <div class="property-card">
+            <img src="https://via.placeholder.com/300" alt="Residence Plaza">
+            <div class="property-details">
+                <h3>Residence Plaza by Hoperty</h3>
+                <p>Localização central com comodidades premium.</p>
+                <p class="price">120€ / noite</p>
+                <a href="#" class="reserve-btn">Reservar Agora</a>
+            </div>
+        </div>
+
+        <div class="property-card">
+            <img src="https://via.placeholder.com/300" alt="Serenity Studio">
+            <div class="property-details">
+                <h3>Serenity Studio by Hoperty</h3>
+                <p>Estúdio confortável e acolhedor.</p>
+                <p class="price">90€ / noite</p>
+                <a href="#" class="reserve-btn">Reservar Agora</a>
+            </div>
+        </div>
+
+        <div class="property-card">
+            <img src="https://via.placeholder.com/300" alt="Bem Me Quer">
+            <div class="property-details">
+                <h3>Bem Me Quer by Hoperty</h3>
+                <p>Alojamento aconchegante e moderno.</p>
+                <p class="price">95€ / noite</p>
+                <a href="#" class="reserve-btn">Reservar Agora</a>
+            </div>
+        </div>
+
+        <div class="property-card">
+            <img src="https://via.placeholder.com/300" alt="Olá Mar">
+            <div class="property-details">
+                <h3>Olá Mar by Hoperty</h3>
+                <p>Vista incrível para o oceano.</p>
+                <p class="price">130€ / noite</p>
+                <a href="#" class="reserve-btn">Reservar Agora</a>
+            </div>
+        </div>
+
+        <div class="property-card">
+            <img src="https://via.placeholder.com/300" alt="Sunset Sea View">
+            <div class="property-details">
+                <h3>Sunset Sea View by Hoperty</h3>
+                <p>Desfrute do pôr do sol à beira-mar.</p>
+                <p class="price">150€ / noite</p>
+                <a href="#" class="reserve-btn">Reservar Agora</a>
+            </div>
+        </div>
+
+        <div class="property-card">
+            <img src="https://via.placeholder.com/300" alt="City View Condo">
+            <div class="property-details">
+                <h3>City View Condo by Hoperty</h3>
+                <p>Vista panorâmica para a cidade.</p>
+                <p class="price">110€ / noite</p>
+                <a href="#" class="reserve-btn">Reservar Agora</a>
+            </div>
+        </div>
+
+        <div class="property-card">
+            <img src="https://via.placeholder.com/300" alt="Holiday Beach">
+            <div class="property-details">
+                <h3>Holiday Beach by Hoperty</h3>
+                <p>Destino perfeito para férias relaxantes.</p>
+                <p class="price">125€ / noite</p>
+                <a href="#" class="reserve-btn">Reservar Agora</a>
+            </div>
+        </div>
+
+        <div class="property-card">
+            <img src="https://via.placeholder.com/300" alt="The Hideaway Retreat">
+            <div class="property-details">
+                <h3>The Hideaway Retreat by Hoperty</h3>
+                <p>Refúgio tranquilo na natureza.</p>
+                <p class="price">135€ / noite</p>
+                <a href="#" class="reserve-btn">Reservar Agora</a>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
