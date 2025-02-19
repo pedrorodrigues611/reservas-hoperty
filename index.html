@@ -16,27 +16,40 @@
             margin-bottom: 20px;
         }
         .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
             gap: 20px;
             max-width: 1200px;
             margin: auto;
         }
         .property-card {
+            width: 30%;
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             background: white;
             position: relative;
+            text-align: left;
+            padding-bottom: 10px;
         }
-        .property-card img {
+        .carousel {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+        }
+        .carousel img {
             width: 100%;
             height: 200px;
             object-fit: cover;
+            display: none;
+        }
+        .carousel img.active {
+            display: block;
         }
         .property-details {
             padding: 15px;
-            text-align: left;
         }
         .property-details h3 {
             margin: 10px 0;
@@ -70,116 +83,74 @@
             border-radius: 5px;
             font-size: 14px;
         }
-        .property-card a {
-            display: block;
-            text-decoration: none;
-            color: inherit;
+        .pagination {
+            margin-top: 20px;
+        }
+        .pagination button {
+            padding: 10px;
+            margin: 5px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
     <h1>As Nossas Propriedades</h1>
-    <div class="grid-container">
-        <!-- Propriedades já existentes -->
-        <a href="blue-paradise.html" class="property-card">
-            <div class="municipio">Caniço</div>
-            <div class="rating">4.9 ★</div>
-            <img src="https://i.imgur.com/h9vIQpq.jpeg" alt="Blue Paradise Apartment">
-            <div class="property-details">
-                <h3>Blue Paradise Apartment</h3>
-                <p>4 hóspedes - 2 quarto - 2 banhos</p>
-                <p class="info">Cozinha · Ar condicionado · Máquina de lavar</p>
-            </div>
-        </a>
+    <div class="grid-container" id="property-list"></div>
+    <div class="pagination" id="pagination"></div>
 
-        <a href="holiday-beach.html" class="property-card">
-            <div class="municipio">Machico</div>
-            <div class="rating">5 ★</div>
-            <img src="https://i.imgur.com/Bbj6RR6.jpeg" alt="Holiday Beach">
-            <div class="property-details">
-                <h3>Holiday Beach</h3>
-                <p>4 hóspedes - 2 quartos - 2 banhos</p>
-                <p class="info">Jacuzzi · Mesa de ping pong</p>
-            </div>
-        </a>
+    <script>
+        const properties = [
+            {name: "Blue Paradise Apartment", location: "Canico", rating: "4.9", guests: "4", rooms: "2", baths: "2", features: "Cozinha · Ar condicionado · Máquina de lavar", images: ["https://i.imgur.com/h9vIQpq.jpeg"]},
+            {name: "Holiday Beach", location: "Machico", rating: "5", guests: "2", rooms: "1", baths: "2", features: "Jacuzzi · Mesa de ping pong", images: ["https://i.imgur.com/Bbj6RR6.jpeg"]},
+            {name: "City View Condo", location: "Funchal", rating: "5", guests: "2", rooms: "1", baths: "2", features: "Vista · Piscina · Piscina aquecida", images: ["https://i.imgur.com/TDoERXn.jpeg"]},
+            {name: "Residence Plaza", location: "Santa Cruz", rating: "4.88", guests: "2", rooms: "1", baths: "1", features: "Vista mar · Wi-Fi gratuito", images: ["https://i.imgur.com/ax98qI8.jpeg"]},
+            {name: "Serenity Studio", location: "Funchal", rating: "4.7", guests: "2", rooms: "1", baths: "1", features: "Cozinha · Varanda", images: ["https://i.imgur.com/5WuebVk.jpeg"]},
+            {name: "Bem Me Quer", location: "Funchal", rating: "4.9", guests: "4", rooms: "1", baths: "1", features: "Wi-Fi · Máquina de café", images: ["https://i.imgur.com/2IvJ8xp.jpeg"]},
+            {name: "The Hideaway Retreat", location: "Santa da Serra", rating: "4.6", guests: "6", rooms: "3", baths: "2", features: "Natureza · Tranquilidade", images: [""]},
+            {name: "Olá Mar", location: "Santa Cruz", rating: "4.8", guests: "3", rooms: "1", baths: "1", features: "Vista mar · Wi-Fi rápido", images: [""]},
+            {name: "Sunset Sea View", location: "Funchal", rating: "4.9", guests: "1", rooms: "1", baths: "1", features: "Pôr do sol incrível · Wi-Fi rápido", images: [""]},
+        ];
 
-        <a href="city-view-condo.html" class="property-card">
-            <div class="municipio">Funchal</div>
-            <div class="rating">5 ★</div>
-            <img src="https://i.imgur.com/TDoERXn.jpeg" alt="City View Condo">
-            <div class="property-details">
-                <h3>City View Condo</h3>
-                <p>2 hóspedes - 1 quarto - 2 banhos</p>
-                <p class="info">Vista · Piscina · Piscina aquecida</p>
-            </div>
-        </a>
+        let currentPage = 1;
+        const perPage = 9;
 
-        <a href="residence-plaza.html" class="property-card">
-            <div class="municipio">Santa Cruz</div>
-            <div class="rating">4.88 ★</div>
-            <img src="https://i.imgur.com/ax98qI8.jpeg" alt="Residence Plaza">
-            <div class="property-details">
-                <h3>Residence Plaza</h3>
-                <p>2 hóspedes - 1 quarto - 1 banho</p>
-                <p class="info">Vista mar · Wi-Fi gratuito</p>
-            </div>
-        </a>
+        function displayProperties() {
+            const start = (currentPage - 1) * perPage;
+            const end = start + perPage;
+            const currentProperties = properties.slice(start, end);
 
-        <a href="serenity-studio.html" class="property-card">
-            <div class="municipio">Funchal</div>
-            <div class="rating">4.7 ★</div>
-            <img src="https://i.imgur.com/5WuebVk.jpeg" alt="Serenity Studio">
-            <div class="property-details">
-                <h3>Serenity Studio</h3>
-                <p>2 hóspedes - 1 quarto - 1 banho</p>
-                <p class="info">Cozinha · Varanda</p>
-            </div>
-        </a>
+            document.getElementById("property-list").innerHTML = currentProperties.map(p => `
+                <div class='property-card'>
+                    <div class='municipio'>${p.location}</div>
+                    <div class='rating'>${p.rating} ★</div>
+                    <div class='carousel'>
+                        ${p.images.map((img, i) => `<img src="${img}" class="${i === 0 ? 'active' : ''}">`).join('')}
+                    </div>
+                    <div class='property-details'>
+                        <h3>${p.name}</h3>
+                        <p>${p.guests} hóspedes - ${p.rooms} quartos - ${p.baths} banhos</p>
+                        <p class='info'>${p.features}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
 
-        <a href="bem-me-quer.html" class="property-card">
-            <div class="municipio">Funchal</div>
-            <div class="rating">4.9 ★</div>
-            <img src="https://i.imgur.com/2IvJ8xp.jpeg" alt="Bem Me Quer">
-            <div class="property-details">
-                <h3>Bem Me Quer</h3>
-                <p>4 hóspedes - 1 quartos - 1 banho</p>
-                <p class="info">Wi-Fi · Máquina de café</p>
-            </div>
-        </a>
+        function updatePagination() {
+            const totalPages = Math.ceil(properties.length / perPage);
+            let buttons = "";
+            for (let i = 1; i <= totalPages; i++) {
+                buttons += `<button onclick='changePage(${i})'>${i}</button>`;
+            }
+            document.getElementById("pagination").innerHTML = buttons;
+        }
 
-        <!-- Novas Propriedades -->
-        <a href="hideaway-retreat.html" class="property-card">
-            <div class="municipio">Santo da Serra</div>
-            <div class="rating">4.6 ★</div>
-            <img src="https://i.imgur.com/HwgAeyM.jpeg" alt="Hideaway Retreat">
-            <div class="property-details">
-                <h3>The Hideaway Retreat</h3>
-                <p>6 hóspedes - 3 quartos - 2 banhos</p>
-                <p class="info">Natureza · Tranquilidade</p>
-            </div>
-        </a>
+        function changePage(page) {
+            currentPage = page;
+            displayProperties();
+        }
 
-        <a href="ola-mar.html" class="property-card">
-            <div class="municipio">Santa Cruz</div>
-            <div class="rating">4.8 ★</div>
-            <img src="https://i.imgur.com/rbGA8OM.jpeg" alt="Olá Mar">
-            <div class="property-details">
-                <h3>Olá Mar</h3>
-                <p>3 hóspedes - 1 quartos - 1 banho</p>
-                <p class="info">Vista mar · Wi-Fi rápido</p>
-            </div>
-        </a>
-
-        <a href="sunset-sea-view.html" class="property-card">
-            <div class="municipio">Funchal</div>
-            <div class="rating">4.9 ★</div>
-            <img src="https://i.imgur.com/0Q5y762.jpeg" alt="Sunset Sea View">
-            <div class="property-details">
-                <h3>Sunset Sea View</h3>
-                <p>1 hóspedes - 1 quarto - 1 banho</p>
-                <p class="info">Pôr do sol incrível · Wi-Fi rápido</p>
-            </div>
-        </a>
-    </div>
+        displayProperties();
+        updatePagination();
+    </script>
 </body>
 </html>
