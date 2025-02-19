@@ -5,3 +5,30 @@ html, body {
     padding: 0;
     width: 100%;
 }
+.grid-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* Desktop: 3 colunas */
+.property-card {
+    width: 30%;
+}
+
+/* Tablet: 2 colunas */
+@media (max-width: 1024px) {
+    .property-card {
+        width: 45%;
+    }
+}
+
+/* Telemóvel: 1 coluna */
+@media (max-width: 768px) {
+    .property-card {
+        width: 90%;
+    }
+}
