@@ -133,21 +133,21 @@
             {name: "Sunset Sea View", location: "Funchal", rating: "4.9", guests: "1", rooms: "1", baths: "1", features: "Pôr do sol incrível · Wi-Fi rápido", images: ["https://i.imgur.com/0Q5y762.jpeg"]},
         ];
 
-        function displayProperties() {
+         function displayProperties() {
             document.getElementById("property-list").innerHTML = properties.map(p => `
                 <div class='property-card'>
-                    <div class='municipio'>${p.location}</div>
-                    <div class='rating'>${p.rating} ★</div>
-                    <div class='carousel'>
-                        ${p.images.map((img, i) => `<img src="${img}" class="${i === 0 ? 'active' : ''}">`).join('')}
-                        <button class='prev' onclick='prevImage(this)'>❮</button>
-                        <button class='next' onclick='nextImage(this)'>❯</button>
-                    </div>
-                    <div class='property-details'>
-                        <h3>${p.name}</h3>
-                        <p>${p.guests} hóspedes - ${p.rooms} quartos - ${p.baths} banhos</p>
-                        <p class='info'>${p.features}</p>
-                    </div>
+                    <a href="https://hopertybnb.com/${p.name.toLowerCase().replace(/ /g, '-')}">
+                        <div class='municipio'>${p.location}</div>
+                        <div class='rating'>${p.rating} ★</div>
+                        <div class='carousel'>
+                            ${p.images.map((img, i) => `<img src="${img}" class="${i === 0 ? 'active' : ''}">`).join('')}
+                        </div>
+                        <div class='property-details'>
+                            <h3>${p.name}</h3>
+                            <p>${p.guests} hóspedes - ${p.rooms} quartos - ${p.baths} banhos</p>
+                            <p class='info'>${p.features}</p>
+                        </div>
+                    </a>
                 </div>
             `).join('');
         }
