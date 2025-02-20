@@ -1,10 +1,12 @@
+/* Remover margens e paddings globais */
 html, body {
-    overflow: hidden;
     overflow-x: hidden;
     margin: 0;
     padding: 0;
     width: 100%;
 }
+
+/* Container principal dos cards */
 .grid-container {
     display: flex;
     flex-wrap: wrap;
@@ -12,23 +14,42 @@ html, body {
     gap: 20px;
     max-width: 1200px;
     margin: auto;
+    padding: 20px; /* Adiciona espaço ao redor dos cards */
 }
 
-/* Desktop: 3 colunas */
+/* Estilo base dos cartões */
 .property-card {
     width: 30%;
+    background: white;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Centraliza o texto dentro do card */
 }
 
-/* Tablet: 2 colunas */
+/* Garante que as imagens não fiquem distorcidas */
+.property-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+/* Responsividade para tablet (2 colunas) */
 @media (max-width: 1024px) {
     .property-card {
         width: 45%;
     }
 }
 
-/* Telemóvel: 1 coluna */
+/* Responsividade para telemóvel (1 coluna) */
 @media (max-width: 768px) {
+    .grid-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
     .property-card {
         width: 90%;
+        max-width: 400px;
     }
 }
