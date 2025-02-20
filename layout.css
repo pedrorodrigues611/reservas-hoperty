@@ -27,8 +27,33 @@ html, body {
 }
 
 /* Telemóvel: 1 coluna */
-@media (max-width: 768px) {
-    .property-card {
-        width: 90%;
+@media (max-width: 768px) {  
+    body {
+        font-size: 14px; /* Reduz o tamanho do texto */
+        line-height: 1.4; /* Aumenta o espaçamento para melhor leitura */
+    }
+
+    h1, h2, h3 {
+        font-size: 90%; /* Torna os títulos mais pequenos */
+    }
+
+    p {
+        font-size: 85%;
+    }
+
+    .container {
+        width: 95%;
+        max-width: 400px; /* Reduz a largura para ficar adequado ao telemóvel */
+    }
+
+    img {
+        max-width: 100%; /* Garante que as imagens se ajustam */
+        height: auto;
+    }
+
+    button {
+        font-size: 14px; /* Botões menores */
+        padding: 6px 10px;
     }
 }
+
