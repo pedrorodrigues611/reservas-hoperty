@@ -153,7 +153,7 @@
          function displayProperties() {
             document.getElementById("property-list").innerHTML = properties.map(p => `
                 <div class='property-card'>
-                    <a href="https://hopertybnb.com/${p.name.toLowerCase().replace(/ /g, '-')}" style="text-decoration: none;">
+                    <a href="https://hopertybnb.com/${p.name.toLowerCase().replace(/ /g, '-')}" target="_top" style="text-decoration: none;">
                         <div class='municipio'>${p.location}</div>
                         <div class='rating'>${p.rating} ★</div>
                         <div class='carousel'>
