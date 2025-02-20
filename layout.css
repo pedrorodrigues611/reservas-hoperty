@@ -1,34 +1,81 @@
+/* Reset global */
 html, body {
-    overflow: hidden;
-    overflow-x: hidden;
     margin: 0;
     padding: 0;
     width: 100%;
+    overflow-x: hidden;
 }
+
+/* Container principal */
 .grid-container {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    max-width: 1200px;
-    margin: auto;
+    flex-direction: column; /* Stack cards vertically */
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    padding: 10px;
 }
 
-/* Desktop: 3 colunas */
+/* Estilização dos cartões */
 .property-card {
-    width: 30%;
+    width: 95%; /* Ocupa quase toda a largura da tela */
+    max-width: 400px; /* Evita que fique exageradamente largo */
+    background: white;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-/* Tablet: 2 colunas */
-@media (max-width: 1024px) {
-    .property-card {
-        width: 45%;
-    }
+/* Ajustando imagens */
+.property-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
 }
 
-/* Telemóvel: 1 coluna */
+/* Ajuste de fonte para telemóvel */
+.property-card h2 {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+/* Ajustes para botões ou labels */
+.property-card .button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 16px;
+}
+
+/* Aplicável apenas a ecrãs menores que 768px */
 @media (max-width: 768px) {
+    body {
+        background-color: #f8f9fa; /* Cor de fundo para suavizar */
+    }
+
+    .grid-container {
+        padding: 15px;
+    }
+
     .property-card {
         width: 90%;
+        max-width: 350px;
+    }
+
+    .property-card h2 {
+        font-size: 16px;
+    }
+
+    .property-card .button {
+        font-size: 14px;
     }
 }
